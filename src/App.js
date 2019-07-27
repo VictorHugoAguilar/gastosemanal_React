@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Importamos componentes
 import Pregunta from "./Components/Pregunta";
 import Formulario from "./Components/Formulario";
+import Listado from "./Components/Listado";
 
 function App() {
     // State del componente principal
@@ -10,6 +11,18 @@ function App() {
     const [preguntaPresupuesto, guardarPreguntaPresupuesto] = useState(true);
     const [ gasto, setGasto ] = useState({});
     const [ gastos, setGastos ] = useState([]);
+    const [ crearGasto, setCrearGasto ] = useState(false);
+
+    useEffect(() => {
+        if(crearGasto){
+        const listadoGasto = [ ...gastos, gasto];
+        setGastos(listadoGasto);
+
+        // Una vez que se agreaga, lo ponemos como false
+        setCrearGasto(false);
+        }
+
+    }, [crearGasto]);
 
     return (
         <div className="App container">
@@ -28,10 +41,13 @@ function App() {
                             <div className="one-half column">
                                 <Formulario 
                                   setGasto = {setGasto}
+                                  setCrearGasto = {setCrearGasto}
                                 />
                             </div>
                             <div className="one-half column">
-                                <p>Formulario Aqui</p>
+                                <Listado 
+                                gastos={gastos}
+                                />
                             </div>
                         </div>
                     )}

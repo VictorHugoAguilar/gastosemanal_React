@@ -6,7 +6,7 @@ import Error from './Error';
 
 function Formulario(props) {
 
-    const { setGasto } = props;
+    const { setGasto, setCrearGasto  } = props;
 
     // Inicializamos los state
     const [nombreGasto, setNombreGasto] = useState("");
@@ -38,6 +38,8 @@ function Formulario(props) {
         console.log(gasto)
         // pasar el gasto al componente principal
         setGasto(gasto);
+        
+        setCrearGasto(true);
 
         // Eliminar alerta
         setError(false);
