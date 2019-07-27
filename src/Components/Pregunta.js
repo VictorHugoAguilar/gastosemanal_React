@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import Error from "./Error";
 
 function Pregunta(props) {
-    const { guardarPresupuesto, guardarPreguntaPresupuesto } = props;
+    const { guardarPresupuesto, guardarPreguntaPresupuesto, setRestante } = props;
 
     // definir el state
     const [cantidad, guardarCantidad] = useState(0);
@@ -22,6 +22,7 @@ function Pregunta(props) {
         // si se pasa la validación
         guardarError(false);
         guardarPresupuesto(cantidad);
+        setRestante(cantidad);
         guardarPreguntaPresupuesto(false);
     };
 
