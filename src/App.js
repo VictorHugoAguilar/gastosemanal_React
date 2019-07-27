@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 // Importamos componentes
 import Pregunta from "./Components/Pregunta";
+import Formulario from "./Components/Formulario";
 
 function App() {
     // State del componente principal
@@ -23,7 +24,7 @@ function App() {
                     ) : (
                         <div className="row">
                             <div className="one-half column">
-                                <p>Formulario Aqui</p>
+                                <Formulario />
                             </div>
                             <div className="one-half column">
                                 <p>Formulario Aqui</p>
