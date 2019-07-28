@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import shortid from 'shortid';
+import shortid from "shortid";
 
 // Importamos componentes
-import Error from './Error';
+import Error from "./Error";
 
 function Formulario(props) {
-
-    const { setGasto, setCrearGasto  } = props;
+    const { setGasto, setCrearGasto } = props;
 
     // Inicializamos los state
     const [nombreGasto, setNombreGasto] = useState("");
@@ -33,28 +32,28 @@ function Formulario(props) {
             nombreGasto,
             cantidadGasto,
             id: shortid.generate()
-        }
+        };
 
-        console.log(gasto)
+        // console.log(gasto)
         // pasar el gasto al componente principal
         setGasto(gasto);
-        
+
         setCrearGasto(true);
 
         // Eliminar alerta
         setError(false);
 
         // Resetear el form
-        setNombreGasto('');
-        setCantidadGasto('');
+        setNombreGasto("");
+        setCantidadGasto("");
     };
 
     return (
         <form onSubmit={agregarGasto}>
             <h2>Añade los gastos</h2>
-            
+
             {error ? (
-                <Error mensaje={'Ambos campos son obligatorios '} />
+                <Error mensaje={"Ambos campos son obligatorios "} />
             ) : null}
 
             <div className="campo">

@@ -6,7 +6,6 @@ import Formulario from "./Components/Formulario";
 import Listado from "./Components/Listado";
 import ControlPresupuesto from "./Components/ControlPresupuesto";
 
-
 function App() {
     // State del componente principal
     const [presupuesto, guardarPresupuesto] = useState(0);
@@ -15,16 +14,35 @@ function App() {
     const [gasto, setGasto] = useState({});
     const [gastos, setGastos] = useState([]);
     const [crearGasto, setCrearGasto] = useState(false);
+    const [idGasto, setIdGasto] = useState("0");
+    const [eliminado, setEliminado] = useState(false);
 
     useEffect(() => {
         if (crearGasto) {
             const listadoGasto = [...gastos, gasto];
             setGastos(listadoGasto);
 
+            // Restar presupuesto
+            const presupuestoRestante = restante - gasto.cantidadGasto;
+            setRestante(presupuestoRestante);
+
             // Una vez que se agreaga, lo ponemos como false
             setCrearGasto(false);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [crearGasto]);
+
+    useEffect(() => {
+        if (eliminado) {
+          // console.log("Objeto a eliminar => " + idGasto);
+          const gastoEliminado = gastos.filter(gasto => gasto.id === idGasto);
+          const cantidadASumar = gastoEliminado[0].cantidadGasto;
+          setRestante(restante + cantidadASumar);
+          const gastosRestantes = gastos.filter(gasto => gasto.id !== idGasto);
+          setGastos(gastosRestantes);
+        } 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [idGasto, eliminado]);
 
     return (
         <div className="App container">
@@ -48,11 +66,15 @@ function App() {
                                 />
                             </div>
                             <div className="one-half column">
-                                <Listado gastos={gastos} />
+                                <Listado
+                                    gastos={gastos}
+                                    setIdGasto={setIdGasto}
+                                    setEliminado={setEliminado}
+                                />
 
-                                <ControlPresupuesto 
-                                  presupuesto={presupuesto}
-                                  restante={restante}
+                                <ControlPresupuesto
+                                    presupuesto={presupuesto}
+                                    restante={restante}
                                 />
                             </div>
                         </div>

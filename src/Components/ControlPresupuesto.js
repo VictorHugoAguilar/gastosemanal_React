@@ -1,9 +1,12 @@
 import React, { Fragment } from "react";
+import {revisarPresupuesto} from "../helper";
 
 const ControlPresupuesto = ({ presupuesto, restante }) => (
     <Fragment>
-        <div className="alert alert-primary">Presupuesto: $ {presupuesto}</div>
-        <div className="">Restante: $ {restante}</div>
+        <div className="alert alert-primary">Presupuesto Inicial: $ {presupuesto}</div>
+        <div className={revisarPresupuesto(presupuesto, restante)}>
+            Restante: $ {restante}
+        </div>
     </Fragment>
 );
 
